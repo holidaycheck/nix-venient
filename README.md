@@ -2,6 +2,17 @@
 
 Provides a collection of convenient functions for working with nix and nixpkgs.
 
+### Installation
+
+The easiest way is to install it via nix:
+
+```
+$ git clone https://github.com/holidaycheck/nix-venient.git
+$ nix-env -f . -i
+```
+
+### Usage
+
 ```
 $ nix-venient
 Usage: nix-venient <command> <args>
