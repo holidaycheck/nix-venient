@@ -36,14 +36,12 @@ case "$1" in
         ./lib/fetch-source $*
         exit $?
         ;;
+    "install-from-channel" )
+        shift
+        ./lib/install-from-channel $*
+        exit $?
+        ;;
 esac
-
-nix-install-from-channel() {
-  local _channel="$1"
-  local _pkg="$2"
-
-  nix-env -f http://nixos.org/channels/"$_channel"/nixexprs.tar.xz -i "$_pkg"; 
-}
 
 nix-package-search() {
   # Originaly from: https://www.reddit.com/r/NixOS/comments/5yxt45/simple_nix_package_search/
