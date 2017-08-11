@@ -41,23 +41,9 @@ case "$1" in
         ./lib/install-from-channel $*
         exit $?
         ;;
+    "search" )
+        shift
+        ./lib/search $*
+        exit $?
+        ;;
 esac
-
-nix-package-search() {
-  # Originaly from: https://www.reddit.com/r/NixOS/comments/5yxt45/simple_nix_package_search/
-  local CACHE="$HOME/.cache/nq-cache"
-  if ! ( [ -e $CACHE ] && [ $(stat -c %Y $CACHE) -gt $(( $(date +%s) - 3600*24*7 )) ] ); then
-          echo "update cache" 1>&2
-          nice nix-env -qa --file "<nixpkgs>" --json > "$CACHE"
-  fi
-  jq -r 'to_entries | .[] | .key + "|" + .value.meta.description' < "$CACHE" |
-    {
-       if [ $# -gt 0 ]; then
-          # double grep because coloring breaks column's char count
-          # $* so that we include spaces (could do .* instead?)
-            grep -i "$*" | column -t -s "|" | grep --color=always -i "$*"
-       else
-            column -t -s "|"
-       fi
-    }
-}
