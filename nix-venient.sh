@@ -35,12 +35,6 @@ nix-install-from-channel() {
   nix-env -f http://nixos.org/channels/"$_channel"/nixexprs.tar.xz -i "$_pkg"; 
 }
 
-nix-list-deps() {
-  local _pkg="$1"
-
-  nix-store --query --references $(nix-instantiate '<nixpkgs>' -A "$_pkg") 
-}
-
 nix-get-sources() {
   local _pkg="$1"
   local _output=$(nix-build '<nixpkgs>' -A "$_pkg".src --no-out-link | xargs basename | cut -f 2- -d "-")
