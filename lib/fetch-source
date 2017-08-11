@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+run() {
+  local _pkg="$1"
+  local _output=$(nix-build '<nixpkgs>' -A "$_pkg".src --no-out-link | xargs basename | cut -f 2- -d "-")
+
+  nix-build '<nixpkgs>' -A "$_pkg".src -o "$_output"
+}
+
+usage() {
+    echo -e "nix-venient fetch-source <pkg> : fetch sources of pkg\n"
+    echo -e "Examples:\n"
+    echo -e "  $ nix-venient fetch-source hello"
+    echo -e "  $ nix-venient fetch-source jq"
+}
+
+if [[ $# -ne 1 || $1 = "--help" ]]; then
+    usage
+    exit 1
+else
+    run "$*"
+fi

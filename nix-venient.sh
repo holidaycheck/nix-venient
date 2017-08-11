@@ -30,6 +30,12 @@ case "$1" in
         shift
         ./lib/channel-sha $*
         exit $?
+        ;;
+    "fetch-source" )
+        shift
+        ./lib/fetch-source $*
+        exit $?
+        ;;
 esac
 
 nix-install-from-channel() {
@@ -37,13 +43,6 @@ nix-install-from-channel() {
   local _pkg="$2"
 
   nix-env -f http://nixos.org/channels/"$_channel"/nixexprs.tar.xz -i "$_pkg"; 
-}
-
-nix-get-sources() {
-  local _pkg="$1"
-  local _output=$(nix-build '<nixpkgs>' -A "$_pkg".src --no-out-link | xargs basename | cut -f 2- -d "-")
-
-  nix-build '<nixpkgs>' -A "$_pkg".src -o "$_output"
 }
 
 nix-package-search() {
