@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+run() {
+    local _channel="$1"
+
+    nix-prefetch-url --type sha256 --unpack https://nixos.org/channels/"${_channel}"/nixexprs.tar.xz 2>/dev/null
+}
+
+usage() {
+    echo -e "nix-venient channel-sha <channel> : Get sha of specified channel\n"
+    echo -e "Examples:\n"
+    echo -e "  $ nix-venient channel-sha nixpkgs-unstable"
+    echo -e "  $ nix-venient channel-sha nixos-unstable"
+}
+
+if [[ $# -ne 1 || $1 = "--help" ]]; then
+    usage
+    exit 1
+else
+    run "$*"
+fi

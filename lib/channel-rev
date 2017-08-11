@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+run() {
+    local _channel="$1"
+
+    curl --silent -L https://nixos.org/channels/"${_channel}"/git-revision
+}
+
+usage() {
+    echo -e "nix-venient channel-rev <channel> : Get git revision of channel\n"
+    echo -e "Examples:\n"
+    echo -e "  $ nix-venient channel-rev nixpkgs-unstable"
+    echo -e "  $ nix-venient channel-rev nixos-unstable"
+}
+
+if [[ $# -ne 1 || $1 = "--help" ]]; then
+    usage
+    exit 1
+else
+    run "$*"
+fi

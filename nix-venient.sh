@@ -20,13 +20,17 @@ case "$1" in
         shift
         ./lib/nixpkgs-version $*
         exit $?
+        ;;
+    "channel-rev" )
+        shift
+        ./lib/channel-rev $*
+        exit $?
+        ;;
+    "channel-sha" )
+        shift
+        ./lib/channel-sha $*
+        exit $?
 esac
-
-nixpkgs-get-version() {
-    local _channel="$1"
-
-    curl --silent -L https://nixos.org/channels/"${_channel}"/git-revision
-}
 
 nix-install-from-channel() {
   local _channel="$1"
