@@ -1,5 +1,4 @@
-#!/usr/bin/env nix-shell
-#!nix-shell -p jq curl -i bash
+#!/usr/bin/env bash
 
 VERSION="0.1"
 
