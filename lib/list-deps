@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+run() {
+  local _pkg="$1"
+
+  nix-store --query --references $(nix-instantiate '<nixpkgs>' -A "$_pkg") 
+}
+
+usage() {
+    echo -e "nix-venient list-deps <pkg> : List dependencies for pkg\n"
+    echo -e "Examples:\n"
+    echo -e "  $ nix-venient list-deps hello"
+    echo -e "  $ nix-venient list-deps nodejs"
+}
+
+if [[ $# -ne 1 || $1 = "--help" ]]; then
+    usage
+    exit 1
+else
+    run "$*"
+fi
+
+

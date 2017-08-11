@@ -1,5 +1,22 @@
 #!/usr/bin/env bash
 
+VER=0.1
+usage() {
+    echo "nix-venient - $VER"
+}
+
+if [[ $# = 0 ]]; then
+    usage
+    exit 1
+fi
+
+case "$1" in
+    "list-deps" )
+        shift
+        ./lib/list-deps $*
+        ;;
+esac
+
 nixpkgs-get-version() {
     local _channel="$1"
 
