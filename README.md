@@ -1,5 +1,7 @@
 # nix-venient
 
+![travis-status](https://travis-ci.org/holidaycheck/nix-venient.svg?branch=master)
+
 Provides a collection of convenient functions for working with nix and nixpkgs.
 
 ### Installation
