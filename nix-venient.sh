@@ -1,8 +1,20 @@
 #!/usr/bin/env bash
 
-VER=0.1
+VERSION="0.1"
+
 usage() {
-    echo "nix-venient - $VER"
+    echo "Usage: nix-venient <command> <args>"
+    echo ""
+    echo "  list-deps             - list dependencies of a package"
+    echo "  nixpkgs-version       - get version of <nixpkgs>"
+    echo "  channel-rev           - get git revision of a channel"
+    echo "  channel-sha           - get SHA of a channel"
+    echo "  fetch-source          - fetch sources of a package"
+    echo "  install-from-channel  - install package from a given channel"
+    echo "  search                - search for a package in <nixpkgs>"
+    echo "  version               - print version"
+    echo ""
+    echo "For additional information try 'nix-venient <command> --help'"
 }
 
 if [[ $# = 0 ]]; then
@@ -11,6 +23,10 @@ if [[ $# = 0 ]]; then
 fi
 
 case "$1" in
+    "version" )
+        echo "nix-venient ${VERSION}"
+        exit 1
+        ;;
     "list-deps" )
         shift
         ./lib/list-deps $*
@@ -46,4 +62,6 @@ case "$1" in
         ./lib/search $*
         exit $?
         ;;
+    "*")
+        usage
 esac
