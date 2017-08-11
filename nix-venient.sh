@@ -14,17 +14,18 @@ case "$1" in
     "list-deps" )
         shift
         ./lib/list-deps $*
+        exit $?
         ;;
+    "nixpkgs-version" )
+        shift
+        ./lib/nixpkgs-version $*
+        exit $?
 esac
 
 nixpkgs-get-version() {
     local _channel="$1"
 
     curl --silent -L https://nixos.org/channels/"${_channel}"/git-revision
-}
-
-nixpkgs-version() { 
-    nix-instantiate --eval -E '(import <nixpkgs> {}).lib.nixpkgsVersion' 
 }
 
 nix-install-from-channel() {

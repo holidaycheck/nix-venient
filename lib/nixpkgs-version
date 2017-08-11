@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+run() {
+    nix-instantiate --eval -E '(import <nixpkgs> {}).lib.nixpkgsVersion'  | tr -d '"'
+}
+
+usage() {
+    echo -e "nix-venient nixpkgs-version : show current version of <nixpkgs>\n"
+    echo -e "Examples:\n"
+    echo -e "  $ nix-venient nixpkgs-version"
+}
+
+if [[ $# -gt 0 ]]; then
+    usage
+    exit 1
+else
+    run "$*"
+fi
