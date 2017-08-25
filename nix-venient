@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-VERSION="0.1"
+VERSION="0.2"
 
 usage() {
     echo "Usage: nix-venient <command> <args>"
@@ -29,37 +29,37 @@ case "$1" in
         ;;
     "list-deps" )
         shift
-        ./lib/list-deps $*
+        "${BASH_SOURCE%/*}"/lib/list-deps $*
         exit $?
         ;;
     "nixpkgs-version" )
         shift
-        ./lib/nixpkgs-version $*
+        "${BASH_SOURCE%/*}"/lib/nixpkgs-version $*
         exit $?
         ;;
     "channel-rev" )
         shift
-        ./lib/channel-rev $*
+        "${BASH_SOURCE%/*}"/lib/channel-rev $*
         exit $?
         ;;
     "channel-sha" )
         shift
-        ./lib/channel-sha $*
+        "${BASH_SOURCE%/*}"/lib/channel-sha $*
         exit $?
         ;;
     "fetch-source" )
         shift
-        ./lib/fetch-source $*
+        "${BASH_SOURCE%/*}"/lib/fetch-source $*
         exit $?
         ;;
     "install-from-channel" )
         shift
-        ./lib/install-from-channel $*
+        "${BASH_SOURCE%/*}"/lib/install-from-channel $*
         exit $?
         ;;
     "search" )
         shift
-        ./lib/search $*
+        "${BASH_SOURCE%/*}"/lib/search $*
         exit $?
         ;;
     "*")
