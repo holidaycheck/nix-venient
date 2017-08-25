@@ -5,7 +5,7 @@ let
 in
   stdenv.mkDerivation rec {
 
-    version = "0.1";
+    version = "0.2";
     name = "nix-venient-${version}";
     src = builtins.filterSource (name: type: !lib.hasPrefix "result" (baseNameOf name) && name != ".git") ./.;
 
